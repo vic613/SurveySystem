@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "BackEnd",
+       "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/backend/surveyapi/surveyapi.csproj"
+      ],
+      "cwd": "${workspaceFolder}/backend/surveyapi",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "FrontEnd",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "serve-frontend",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/frontend/surveyapp"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Run Survey System",
+      "configurations": ["BackEnd", "FrontEnd"]
+    }
+  ]
+}

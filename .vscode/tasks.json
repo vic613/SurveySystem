@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "label": "serve-frontend",
+        "type": "shell",
+        "command": "npx",
+        "args": [
+            "ng",
+            "serve",
+            "--port",
+            "4200"
+        ],
+        "options": {
+            "cwd": "${workspaceFolder}/frontend/surveyapp"
+        },
+        "isBackground": true,
+        "problemMatcher": {
+            "pattern": [
+                {
+                    "regexp": ".+"
+                }
+            ],
+            "background": {
+                "activeOnStart": true,
+                "beginsPattern": ".*",
+                "endsPattern": ".*Compiled successfully.*|.*Application bundle generation complete.*"
+            }
+        }
+    },
+    {
+        "type": "npm",
+        "script": "build",
+        "path": "frontend/surveyapp",
+        "group": "build",
+        "problemMatcher": [],
+        "label": "npm: build - frontend/surveyapp",
+        "detail": "ng build"
+    }
+]
+}

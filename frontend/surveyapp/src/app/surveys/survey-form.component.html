@@ -1,0 +1,84 @@
+<div class="page">
+  <h2>Customer Survey</h2>
+  <p class="sub">Please fill in the customer info and buying behavior.</p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <section class="card">
+      <h3>Customer Info</h3>
+
+      <label>
+        Name
+        <input type="text" formControlName="customerName" placeholder="e.g. John Tan" />
+      </label>
+      <div
+        class="error"
+        *ngIf="form.get('customerName')?.touched && form.get('customerName')?.invalid"
+      >
+        Name is required.
+      </div>
+
+      <label>
+        Age
+        <input type="number" formControlName="age" placeholder="e.g. 28" />
+      </label>
+      <div class="error" *ngIf="form.get('age')?.touched && form.get('age')?.invalid">
+        Age is required (10–120).
+      </div>
+
+      <label>
+        Location
+        <input type="text" formControlName="location" placeholder="e.g. Kepong, KL" />
+      </label>
+      <div class="error" *ngIf="form.get('location')?.touched && form.get('location')?.invalid">
+        Location is required.
+      </div>
+
+      <label>
+        Supermarket Outlet
+        <select formControlName="outletId">
+          <option value="" disabled>Select outlet</option>
+          <option *ngFor="let outlet of outlets" [value]="outlet.id">
+            {{ outlet.name }}
+          </option>
+        </select>
+      </label>
+
+      <div class="error" *ngIf="form.get('outletId')?.touched && form.get('outletId')?.invalid">
+        Outlet selection is required.
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Buying Behavior</h3>
+
+      <div class="question">
+        <div class="q-title">What type of groceries do you usually buy?</div>
+
+        <div class="checklist" formArrayName="groceriesBought">
+          <label class="check" *ngFor="let opt of groceryOptions; let i = index">
+            <input class="check-box" type="checkbox" [formControlName]="i" />
+            <span class="check-text">{{ opt.label }}</span>
+          </label>
+        </div>
+      </div>
+
+      <label>
+        How many times per week do you come to the market?
+        <input type="number" formControlName="visitsPerWeek" placeholder="e.g. 2" />
+      </label>
+      <div
+        class="error"
+        *ngIf="form.get('visitsPerWeek')?.touched && form.get('visitsPerWeek')?.invalid"
+      >
+        Visits per week is required (0–21).
+      </div>
+
+      <label>
+        Notes (optional)
+        <textarea rows="3" formControlName="notes" placeholder="Any extra comment..."></textarea>
+      </label>
+    </section>
+
+    <button class="btn" type="submit">Submit Survey</button>
+  </form>
+</div>
